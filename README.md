@@ -90,6 +90,7 @@ Verify your ChromaDB API is working:
 bash# Test the collections endpoint directly
 curl http://localhost:8000/api/v2/collections
 
+
 # Should return something like: {"collections": []}
 
 
