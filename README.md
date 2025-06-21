@@ -55,6 +55,23 @@ Run the Docker container:
 docker run -p 3001:3001 chromadb-admin
 ```
 
+#Trouble shooting
+
+```bash
+# If using Docker
+docker ps | grep chroma
+
+# If running directly
+curl http://localhost:8000/api/v1/heartbeat
+
+# If running ChromaDB directly
+chroma run --host 0.0.0.0 --port 8000 --path ./chroma_data
+
+# If using Docker
+docker run -p 8000:8000 chromadb/chroma:latest
+```
+
+
 ## Note
 
 This is NOT an official Chroma project.
