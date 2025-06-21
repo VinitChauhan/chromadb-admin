@@ -55,21 +55,42 @@ Run the Docker container:
 docker run -p 3001:3001 chromadb-admin
 ```
 
-#Trouble shooting
+##Trouble shooting
 
-```bash
-# If using Docker
+1. Verify ChromaDB is Running
+First, make sure your local ChromaDB server is actually running:
+
+bash# If using Docker
 docker ps | grep chroma
 
 # If running directly
-curl http://localhost:8000/api/v1/heartbeat
+curl http://localhost:8000/api/v2/heartbeat
+
+You should get a response like {"nanosecond heartbeat": ...}
+
+2. Check ChromaDB Admin Configuration
+In ChromaDB Admin, go to the Setup page and verify:
+
+ChromaDB URL: Should be http://localhost:8000 (or your actual ChromaDB port)
+If using Docker: Try http://host.docker.internal:8000 instead
+
+3. Common Connection Issues
+CORS Issues: ChromaDB might not be configured to accept requests from the admin interface. Start ChromaDB with CORS enabled:
+bash
 
 # If running ChromaDB directly
 chroma run --host 0.0.0.0 --port 8000 --path ./chroma_data
 
 # If using Docker
 docker run -p 8000:8000 chromadb/chroma:latest
-```
+
+4. Test ChromaDB API Directly
+Verify your ChromaDB API is working:
+
+bash# Test the collections endpoint directly
+curl http://localhost:8000/api/v2/collections
+
+# Should return something like: {"collections": []}
 
 
 ## Note
